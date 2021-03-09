@@ -1,47 +1,49 @@
-<nav class="sidebar">
-  {% if ('web/v3/' in page.url) and ('changelogs' not in page.url) %}
-    <p class="nav__header"><a href="/web/v3/">Web v3</a></p>
-    <a href="https://app.mapsindoors.com/mapsindoors/js/sdk/3.12.1/docs/index.html">Reference Docs
-      &UpperRightArrow;</a>
-    <hr />
-    {% set navPages = collections.published | eleventyNavigation("web-v3") %}
-  {% endif %}
-  {% if ('web/v4/' in page.url) and ('changelogs' not in page.url) %}
-    <p class="nav__header"><a href="/web/v4/">Web v4</p>
-    <a href="https://app.mapsindoors.com/mapsindoors/js/sdk/latest/docs/index.html">Reference Docs
-      &UpperRightArrow;</a>
-    <hr />
-    {% set navPages = collections.published | eleventyNavigation("web-v4") %}
-  {% endif %}
-  {% if ('android/v3/' in page.url) and ('changelogs' not in page.url) %}
-    <p class="nav__header"><a href="/android/v3/">Android v3</p>
-    <a href="https://app.mapsindoors.com/mapsindoors/reference/android/v3/index.html">Reference Docs
-      &UpperRightArrow;</a>
-    <hr />
-    {% set navPages = collections.published | eleventyNavigation("android-v3") %}
-  {% endif %}
-  {% if ('ios/v3/' in page.url) and ('changelogs' not in page.url) %}
-   <p class="nav__header"><a href="/ios/v3/">iOS v3</p>
-    <a href="https://app.mapsindoors.com/mapsindoors/reference/ios/v3/index.html">Reference Docs
-      &UpperRightArrow;</a>
-    <hr />
-    {% set navPages = collections.published | eleventyNavigation("ios-v3") %}
-  {% endif %}
-  {% if ('ios/v2/' in page.url) and ('changelogs' not in page.url) %}
-    <p class="nav__header"><a href="/ios/v2/">iOS v2</p>
-    {% set navPages = collections.published | eleventyNavigation("ios-v2") %}
-  {% endif %}
-  {% if ('android/v2/' in page.url) and ('changelogs' not in page.url) %}
-    <p class="nav__header"><a href="/android/v2/">Android v2</p>
-    {% set navPages = collections.published | eleventyNavigation("android-v2") %}
-  {% endif %}
-  {% if '/various' in page.url %}
-    <p class="nav__header"><a href="/various/">Various</p>
-    {% set navPages = collections.published | eleventyNavigation("various") %}
-  {% endif %}
-  {% if '/changelogs' in page.url %}
-    <p class="nav__header"><a href="/changelogs/">Changelogs</p>
-    {% set navPages = collections.published | eleventyNavigation("changelogs") %}
-  {% endif %}
-  {{ navPages | eleventyNavigationToHtml({listClass: "sidebar-nav", activeListItemClass: "active", activeKey: eleventyNavigation.key}) | safe }}
-</nav>
+<div class="sidebar">
+  <nav>
+    {% if ('web/v3/' in page.url) and ('changelogs' not in page.url) %}
+      <p class="nav__header"><a href="/web/v3/">Web v3</a></p>
+      <a href="https://app.mapsindoors.com/mapsindoors/js/sdk/3.12.1/docs/index.html">Reference Docs
+        &UpperRightArrow;</a>
+      <hr />
+      {% set navPages = collections.published | eleventyNavigation("web-v3") %}
+    {% endif %}
+    {% if ('web/v4/' in page.url) and ('changelogs' not in page.url) %}
+      <p class="nav__header"><a href="/web/v4/">Web v4</p>
+      <a href="https://app.mapsindoors.com/mapsindoors/js/sdk/latest/docs/index.html">Reference Docs
+        &UpperRightArrow;</a>
+      <hr />
+      {% set navPages = collections.published | eleventyNavigation("web-v4") %}
+    {% endif %}
+    {% if ('android/v3/' in page.url) and ('changelogs' not in page.url) %}
+      <p class="nav__header"><a href="/android/v3/">Android v3</p>
+      <a href="https://app.mapsindoors.com/mapsindoors/reference/android/v3/index.html">Reference Docs
+        &UpperRightArrow;</a>
+      <hr />
+      {% set navPages = collections.published | eleventyNavigation("android-v3") %}
+    {% endif %}
+    {% if ('ios/v3/' in page.url) and ('changelogs' not in page.url) %}
+    <p class="nav__header"><a href="/ios/v3/">iOS v3</p>
+      <a href="https://app.mapsindoors.com/mapsindoors/reference/ios/v3/index.html">Reference Docs
+        &UpperRightArrow;</a>
+      <hr />
+      {% set navPages = collections.published | eleventyNavigation("ios-v3") %}
+    {% endif %}
+    {% if ('ios/v2/' in page.url) and ('changelogs' not in page.url) %}
+      <p class="nav__header"><a href="/ios/v2/">iOS v2</p>
+      {% set navPages = collections.published | eleventyNavigation("ios-v2") %}
+    {% endif %}
+    {% if ('android/v2/' in page.url) and ('changelogs' not in page.url) %}
+      <p class="nav__header"><a href="/android/v2/">Android v2</p>
+      {% set navPages = collections.published | eleventyNavigation("android-v2") %}
+    {% endif %}
+    {% if '/various' in page.url %}
+      <p class="nav__header"><a href="/various/">Various</p>
+      {% set navPages = collections.published | eleventyNavigation("various") %}
+    {% endif %}
+    {% if '/changelogs' in page.url %}
+      <p class="nav__header"><a href="/changelogs/">Changelogs</p>
+      {% set navPages = collections.published | eleventyNavigation("changelogs") %}
+    {% endif %}
+    {{ navPages | eleventyNavigationToHtml({listClass: "sidebar-nav", activeListItemClass: "active", activeKey: eleventyNavigation.key}) | safe }}
+  </nav>
+</div>
