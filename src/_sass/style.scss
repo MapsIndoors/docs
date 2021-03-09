@@ -13,22 +13,23 @@
 @use '../../node_modules/@mapsindoors/midt/transitions';
 @use '../../node_modules/@mapsindoors/midt/z-index';
 
-@use '../../node_modules/@mapsindoors/midt/build/scss/variables' as *;
+@use '../../node_modules/@mapsindoors/midt/build/scss/variables'as *;
 
 :root {
     background: $color-green-90;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
+    margin: 0;
     scroll-behavior: smooth;
 }
 
-html,
 body {
     margin: 0;
-}
-
-body {
     @include font.family(sans-serif);
     @include font.size(medium);
     @include font.weight(medium);
@@ -41,32 +42,11 @@ body {
     word-break: break-word;
 }
 
-.wrap {
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    @include padding.horizontal(medium);
-}
-
-.container {
-    display: flex;
-    flex: 1 0;
-    @include padding.bottom(x-large);
-}
-
-.content {
-    @include background-color.white(base);
-}
-
-main {
-    width: 500px;
-    @include margin.top(medium);
-    p,
-    ul,
-    ol,
-    blockquote {
-        @include font.measure(large);
-    }
+p,
+ul,
+ol,
+blockquote {
+    @include font.measure(large);
 }
 
 blockquote {
@@ -82,6 +62,7 @@ blockquote {
     @include margin.left(none);
     @include padding.left(small);
     border-radius: 0 $rounding-large $rounding-large 0;
+
     p,
     ol {
         display: inline-block;
@@ -103,6 +84,129 @@ a {
     }
 }
 
+.container {
+    max-width: 1280px;
+    margin-right: auto;
+    margin-left: auto;
+    @include padding.horizontal(large);
+
+}
+
+header {
+    height: 80px;
+    padding-left: 280px; // Sidebar width
+    background-image: linear-gradient(to bottom, $color-green-90, $color-green-100);
+
+    .container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .logo {
+            @include padding.horizontal(large);
+            position: absolute;
+            left: 0;
+
+            path {
+                fill: white;
+            }
+        }
+
+        nav li {
+            float: left;
+
+            a {
+                @include padding.horizontal(medium);
+                @include padding.vertical(x-large);
+                @include color.white(base);
+
+                &:hover {
+                    text-decoration: underline;
+                    @include color.gray(20);
+                }
+
+                &:active {
+                    @include color.gray(30);
+                }
+
+                &:visited {
+                    @include color.white(base);
+                }
+            }
+        }
+    }
+}
+
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    display: block;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    background-image: linear-gradient(to bottom, $color-green-90, $color-green-100);
+    flex-shrink: 0;
+
+    a,
+    .sidebar-nav li a,
+    .nav__header a {
+        @include color.white(base);
+    }
+
+    nav {
+        @include padding.horizontal(large);
+
+        .nav__header {
+            @include font.weight(large);
+            @include font.size(x-large);
+        }
+
+        hr {
+            @include margin.vertical(medium);
+            border-top: 1px solid $color-gray-50;
+        }
+    }
+}
+
+
+main {
+    width: 100%;
+    background-color: #fff;
+
+    .container {
+        @include margin.top(x-large);
+        @include margin.bottom(xxxx-large);
+
+        .article-grid-container {
+            max-width: none;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            grid-template-columns: minmax(500px, 720px) minmax(220px, 1fr);
+            grid-template-areas:
+                "top right-sidebar"
+                "bottom right-sidebar";
+            column-gap: 40px;
+
+            .article-grid-head {
+                grid-area: top;
+            }
+
+            .article-grid-toc {
+                grid-area: right-sidebar;
+            }
+
+            .article-grid-body {
+                grid-area: bottom;
+            }
+        }
+
+
+    }
+}
+
+
+
 // Front page
 
 .front {
@@ -114,12 +218,15 @@ a {
             list-style: none;
             padding: 0;
             @include margin.bottom(medium);
+
             li {
                 display: inline;
                 @include margin.right(medium);
             }
+
             text-align: center;
         }
+
         a.front-button {
             @include font.size(x-large);
             @include padding.vertical(medium);
@@ -136,15 +243,18 @@ a {
             min-width: 180px;
             display: inline-block;
             text-align: center;
+
             &:hover {
                 @include background-color.gray(10);
                 text-decoration: none;
             }
         }
+
         display: grid;
         place-items: center;
         min-height: 90vh;
     }
+
     .headline {
         @include font.family(raleway);
         @include font.size(xxxx-large);
@@ -152,6 +262,7 @@ a {
         @include font.weight(small);
         max-width: 38ch;
     }
+
     .subheadline {
         @include font.size(xx-large);
         @include font.leading(xxx-large);
@@ -162,75 +273,56 @@ a {
     }
 }
 
-// Sidebar navigation
 
-$sidebar-width: 280px;
 
-nav.sidebar {
-    min-width: $sidebar-width;
-    max-width: $sidebar-width;
-    display: block;
-    @include margin.right(xx-large);
-    @include padding.right(medium);
-
-    hr {
-        @include margin.vertical(medium);
-        border-top: 1px solid $color-gray-50;
-    }
-
-    .nav__header {
-        @include font.weight(large);
-        @include font.size(x-large);
-    }
+.article-grid-head {
+    @include padding.top(x-large);
 }
 
-aside {
-    width: $sidebar-width;
-    @include margin.left(xx-large);
-    @include padding.left(medium);
-    box-sizing: border-box;
+.article-grid-toc-content {
+    @include padding.top(xxx-large);
+    position: sticky;
+    top: 0;
 
-    div.toc {
-        padding-top: 56px;
-        position: sticky;
-        top: 0;
+    h4 {
+        margin-top: 0;
+        padding-bottom: .3em;
+        border-bottom: 1px solid #eaecef;
+        @include font.size(medium);
+        @include font.weight(x-large);
+    }
 
-        h4 {
-            margin-top: 0;
-            padding-bottom: .3em;
-            border-bottom: 1px solid #eaecef;
-            @include font.size(medium);
-            @include font.weight(x-large);
-        }
-
-        nav ol {
-            @include font.size(small);
-            line-height: 1.25;
-        }
+    nav ol {
+        @include font.size(small);
+        line-height: 1.25;
     }
 }
 
 nav {
     box-sizing: border-box;
 
-    ul, 
+    ul,
     ol,
     li {
         list-style: none;
         padding: 0;
         margin: 0;
     }
+
     ul,
     ol {
         @include font.size(medium);
         @include font.leading(x-large);
+
         li {
             @include margin.top(x-small);
+
             ul {
                 @include font.weight(medium);
                 @include font.size(medium);
                 @include margin.vertical(small);
                 @include margin.left(medium);
+
                 li {
                     @include margin.top(x-small);
                     @include font.size(medium);
@@ -239,7 +331,7 @@ nav {
         }
     }
 
-    .active > a {
+    .active>a {
         // @include background-color.blue(10);
         // @include padding.horizontal(small);
         // @include padding.vertical(x-small);
@@ -337,6 +429,7 @@ p code {
 pre code {
     @include font.family(monospace);
     @include border.radius(medium);
+
     &.hljs {
         @include padding.all(medium);
         @include border.gray(40);
@@ -345,111 +438,17 @@ pre code {
     }
 }
 
-// header.njk
-
-header {
-    svg.mapspeople-logo path {
-        fill: white;
-    }
-    background-image: linear-gradient(
-        to bottom,
-        $color-green-90,
-        $color-green-100
-    );
-    .flex {
-        display: flex;
-    }
-    .left {
-        @include margin.vertical(medium);
-        flex: 1 1 auto;
-        min-width: 0;
-        min-height: 0;
-    }
-    .right {
-        @include margin.vertical(medium);
-        align-items: center;
-        display: inline-flex;
-        text-align: right;
-
-        a {
-            vertical-align: middle;
-            @include padding.left(medium);
-            display: inline-block;
-        }
-    }
-    a {
-        @include color.white(base);
-
-        &:hover {
-            text-decoration: underline;
-            @include color.gray(20);
-        }
-
-        &:active {
-            @include color.gray(30);
-        }
-
-        &:visited {
-            @include color.white(base);
-        }
-    }
-}
-
-// footer.njk
 
 footer {
-    background-image: linear-gradient(
-        to bottom,
-        $color-green-60,
-        $color-green-90
-    );
-    @include color.white(base);
-    @include margin.all(none);
-    @include padding.all(medium);
+    background-color: #fafbfc;
 
-    a {
-        @include color.white(base);
-
-        &:hover {
-            @include color.white(base);
-        }
-    }
-
-    ul {
-        @include padding.left(none);
-        li {
-            list-style-type: none;
-            line-height: $font-size-xx-large;
-        }
-        li ul {
-            @include padding.left(medium);
-        }
-    }
-
-    .flex {
-        display: -ms-flexbox;
-        display: -webkit-flex;
+    .row {
         display: flex;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-        -webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
-    }
 
-    .third {
-        width: calc(100% / 3);
-        @include margin.right(medium);
+        .column {
+            width: calc(100% / 3);
+            margin-right: 16px;
+        }
     }
 }
 
@@ -458,6 +457,7 @@ footer {
 ol.breadcrumb {
     @include padding.left(none);
     @include margin.top(none);
+
     .item {
         a {
             @include margin.right(small);
@@ -465,9 +465,11 @@ ol.breadcrumb {
             @include font.size(medium);
         }
     }
+
     .item:not(:first-of-type) {
         @include margin.left(xx-small);
     }
+
     .item:not(:last-of-type)::after {
         content: "›";
     }
@@ -497,17 +499,21 @@ table {
     border: 1px solid $color-gray-40;
     border-top: none;
     border-collapse: collapse;
+
     thead {
         @include font.size(large);
         @include background-color.gray(80);
+
         th {
             @include padding.all(small);
             @include color.white(base);
         }
     }
+
     tbody tr:nth-child(odd) {
         @include background-color.gray(10);
     }
+
     td {
         @include padding.horizontal(small);
         @include padding.vertical(small);
@@ -515,6 +521,7 @@ table {
         border-left: 1px solid $color-gray-30;
         vertical-align: baseline;
         word-break: break-word;
+
         &:first-child {
             border-left: none;
         }
@@ -563,61 +570,3 @@ table {
         @include font.size(small);
     }
 }
-
-// // Dark theme overrides. Should always be at the bottom. Not possible until mi-tabs has dark mode too...
-
-// @media (prefers-color-scheme: dark) {
-//   body {
-//     @include font.color(inverse);
-//     @include background-color.gray(100);
-//   }
-
-//   a {
-//     @include color.bronze(30);
-
-//     &:hover {
-//       text-decoration: underline;
-//       @include color.bronze(30);
-//     }
-
-//     &:active {
-//       @include color.bronze(40);
-//     }
-
-//     // &:visited {
-//     //   @include color.bronze(20);
-//     // }
-//   }
-//   pre code.hljs {
-//     @include border.style(none);
-//   }
-//   nav {
-//     .active > a {
-//       @include background-color.gray(90);
-//     }
-//   }
-//   nav.sidebar {
-//     li.active {
-//       @include border.bronze(20);
-//     }
-//   }
-//   header,
-//   p code {
-//     @include background-color.gray(90);
-//     background-image: none;
-//     @include font.color(inverse);
-//   }
-//   h1 {
-//     a {
-//       @include font.color(inverse);
-
-//       &:visited {
-//         @include font.color(inverse);
-//       }
-
-//       &:hover {
-//         @include color.bronze(30);
-//       }
-//     }
-//   }
-// }
