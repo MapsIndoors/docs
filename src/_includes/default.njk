@@ -1,40 +1,46 @@
 {% include "head.njk" %}
-
 <body>
     {% include "header.njk" %}
-    <div class="content">
-        <div class="wrap">
-            <section class="container">
-                {% if ('/web/' in page.url) or ('/ios/' in page.url) or ('/android/' in page.url) or ('/various/' in page.url) or ('/changelogs/' in page.url) %}
-                {% include "sidebar.njk" %}
-                {% endif %}
-                <main>
+
+    <section style="display: flex;">
+        {% if ('/web/' in page.url)or('/ios/' in page.url)or('/android/' in page.url)or('/various/' in page.url)or('/changelogs/' in page.url) %}
+        {% include "sidebar.njk" %}
+        {% endif %}
+
+        <main>
+            <div class="container">
+                <div>
                     <nav aria-label="Breadcrumb">
                         {{ collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) | eleventyNavigationToHtml({listElement: "ol", listItemElement: "span", listItemClass: "item", listClass: "breadcrumb", activeListItemClass: "active", activeKey: eleventyNavigation.key}) | safe }}
                     </nav>
-                    <h1>
-                        <a href="{{ page.url }}">{{ title }}</a>
-                    </h1>
-                    {% if '/404.html' not in page.url and '/search' not in page.url %}
-                    <p class="time">Last updated: <time>{{ page.date.toLocaleDateString() }}</time>
-                    </p>
-                    {% endif %}
-                    {{ content | safe }}
-                </main>
+                </div>
 
-                {% if toc %}
-                <aside>
-                    <div class="toc">
-                        <h4>In this article</h4>
-                        {{ content | toc  | safe }}
+                <div class="article-grid-container">
+                    <div class="article-grid-head">
+                        <h1><a href="{{ page.url }}">{{ title }}</a></h1>
+
+                        {% if '/404.html' not in page.url and '/search' not in page.url %}
+                        <p class="time">Last updated: <time>{{ page.date.toLocaleDateString() }}</time></p>
+                        {% endif %}
                     </div>
-                <aside>
-                {% endif %}
 
-            </section>
-        </div>
-    </div>
-    {% include "footer.njk" %}
+                    <div class="article-grid-toc">
+                        {% if toc %}
+                        <div class="article-grid-toc-content">
+                            <h4>In this article</h4>
+                            {{ content | toc  | safe }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="article-contents">
+                        {{ content | safe }}
+                    </div>
+                </div>
+            </div>
+
+            {% include "footer.njk" %}
+        </main>
+    </section>
 </body>
-
 </html>
