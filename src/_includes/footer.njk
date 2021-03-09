@@ -1,19 +1,20 @@
 <footer>
-  <div class="wrap">
-    <div class="flex">
-      <div class="third">
+  <div class="container">
+
+    <div class="row">
+      <div class="column">
         <h2><a href="/ios/v3/">iOS v3</a></h2>
         {% set iosv3 = collections.published | eleventyNavigation("ios-v3") %}
         {{ iosv3 | eleventyNavigationToHtml | safe }}
-
       </div>
-      <div class="third">
 
+      <div class="column">
         <h2><a href="/android/v3/">Android v3</a></h2>
         {% set androidv3 = collections.published | eleventyNavigation("android-v3") %}
         {{ androidv3 | eleventyNavigationToHtml | safe }}
       </div>
-      <div class="third">
+
+      <div class="column">
         <h2><a href="/web/v4/">Web v4</a></h2>
         {% set webv4 = collections.published | eleventyNavigation("web-v4") %}
         {{ webv4 | eleventyNavigationToHtml | safe }}
@@ -25,26 +26,27 @@
     </div>
 
     <hr />
-    <div class="flex">
-      <div class="third">
+
+    <div class="row">
+      <div class="column">
         <h2>Legacy versions</h2>
         <h4><a href="/android/v2/">Android v2</a></h4>
         <h4><a href="/ios/v2/">iOS v2</a></h4>
         <h4><a href="/xamarin/">Xamarin v3</a></h4>
-
       </div>
-      <div class="third">
+
+      <div class="column">
         <h2><a href="/api/">Integration API</a></h2>
         <h2><a href="/cms/">MapsIndoors CMS</a></h2>
         <h2><a href="/product/">Product Overview</a></h2>
         <h2><a href="/changelogs/">Changelogs</a></h2>
       </div>
-      <div class="third">
+
+      <div class="column">
         <h2><a href="/various/">Various</a></h2>
         {% set various = collections.published | eleventyNavigation("various") %}
         {{ various | eleventyNavigationToHtml | safe }}
       </div>
-
     </div>
 
   </div>
