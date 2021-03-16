@@ -65,4 +65,4 @@ Using a terminal/shell in the project folder, run the following commands:
 
 ## Work with MapsIndoors SDK behind a Firewall
 
-If you need to work with MapsIndoors SDK behind a firewall, you might need to [white-list some IP-adresses]({{ site.url }}/various/ip-whitelisting/).
+If you need to work with MapsIndoors SDK behind a firewall, you might need to [allowlist some IP-addresses]({{ site.url }}/various/mapsindoors-sdk-firewall/).

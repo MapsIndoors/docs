@@ -18,6 +18,20 @@ Changelog for MapsIndoors for iOS. This document structure is based on [Keep a C
 ### Removed
 -->
 
+## [3.20.0] 2021-03-05
+
+### Changed
+
+- Changed the default map label font to Arial to fix a rendering issue with the original default font. The choice of Arial font aligns well with rendering on a Google Map. If you need to change this, use `MPMapControl.mapLabelFont`
+- Changed the default map label font size to 14 points.
+- `MPMapControlDelegate` method `didTapAtCoordinate(withLocations:)` now calls back on both map and marker tappings.
+
+### Fixed
+
+- Fixed some map label rendering artifacts when rendering the system font with a stroke as the map label font.
+- Fixed some Live Data related stability issues.
+- Fixed a caching issue causing some Locations to get the same icon.
+
 ## [3.19.0] 2021-02-24
 
 ### Changed
